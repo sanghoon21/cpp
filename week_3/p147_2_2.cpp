@@ -1,22 +1,30 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
-int reverse(int n); // 함수 선언
+// reverse 함수 선언
+int reverse(int num);
 
+// 메인 함수 정의
 int main() {
-    int num;
-    cout << "정수를 입력하세요: ";
-    cin >> num;
-    cout << "역순 변환 결과: " << reverse(num) << endl;
-    return 0;
+    int number;
+    
+    // 사용자로부터 정수 입력받기
+    printf("Enter a positive integer: ");
+    scanf("%d", &number);
+    
+    // reverse 함수 호출 및 결과 출력
+    int result = reverse(number);
+    printf("Reversed number: %d\n", result);
+    
+    return 0;  // 프로그램 종료 상태 반환
 }
 
-// 함수 정의 (main 함수 뒤에 위치)
-int reverse(int n) {
-    int reversedNum = 0;
-    while (n > 0) {
-        reversedNum = reversedNum * 10 + (n % 10); // 숫자를 뒤집음
-        n /= 10;
+// reverse 함수 정의: 정수를 입력받아 각 자리 숫자를 역순으로 변환
+int reverse(int num) {
+    int reversed = 0;
+    while (num > 0) {
+        int digit = num % 10;         // 마지막 자리 숫자 추출
+        reversed = reversed * 10 + digit; // 역순으로 숫자 추가
+        num = num / 10;               // 마지막 자리 제거
     }
-    return reversedNum;
+    return reversed;
 }
