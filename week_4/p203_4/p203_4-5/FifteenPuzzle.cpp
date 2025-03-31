@@ -20,11 +20,26 @@ static std::vector<char> moveHistory;
 static int shuffledMap[MAX_DIM][MAX_DIM]; // 최초 섞인 맵 저장
 static int shuffledX, shuffledY;          // 최초 섞인 상태의 빈칸 위치 저장
 
-static void init(int size) {
+// 하트 그림 퍼즐을 위한 아스키 아트 문자 배열 (4x4)
+static const char heartChars[4][4] = {
+    {'*', '*', '*', '*'},
+    {'*', ' ', ' ', '*'},
+    {'*', ' ', ' ', '*'},
+    {'*', '*', '*', '*'}
+};
+
+static void init(int size, bool isHeartPuzzle) {
     DIM = size;
-    for (int i = 0; i < DIM * DIM - 1; i++) 
-        map[i / DIM][i % DIM] = i + 1;
-    map[DIM - 1][DIM - 1] = 0;
+    if (!isHeartPuzzle) {
+        for (int i = 0; i < DIM * DIM - 1; i++) 
+            map[i / DIM][i % DIM] = i + 1;
+        map[DIM - 1][DIM - 1] = 0;
+    } else {
+        // 하트 그림 퍼즐 초기화 (4x4 고정)
+        for (int i = 0; i < 15; i++) 
+            map[i / 4][i % 4] = i + 1;
+        map[3][3] = 0;
+    }
     x = DIM - 1; y = DIM - 1;
     srand(time(NULL));
     tStart = std::chrono::high_resolution_clock::now();
@@ -34,15 +49,21 @@ static void init(int size) {
     moveHistory.clear();
 }
 
-static void display(bool isReplay = false) {
+static void display(bool isReplay = false, bool isHeartPuzzle = false) {
     system("clear");
     printf("\tFifteen Puzzle (%dx%d)\n\t", DIM, DIM);
     printf("--------------\n\t");
     for (int r = 0; r < DIM; r++) {
         for (int c = 0; c < DIM; c++) {
-            if (map[r][c] > 0)
-                printf("%3d", map[r][c]);
-            else printf("   ");
+            if (map[r][c] > 0) {
+                if (isHeartPuzzle && DIM == 4) {
+                    printf(" %c ", heartChars[r][c]); // 문자만 출력
+                } else {
+                    printf("%3d ", map[r][c]); // 일반 퍼즐은 숫자 출력
+                }
+            } else {
+                printf("    "); // 빈칸은 4칸 공백
+            }
         }
         printf("\n\t");
     }
@@ -101,11 +122,19 @@ static void shuffle(int nShuffle) {
     shuffledY = y;
 }
 
-static bool isDone() {
-    for (int r = 0; r < DIM; r++) {
-        for (int c = 0; c < DIM; c++) {
-            if (map[r][c] != r * DIM + c + 1)
-                return (r == DIM - 1) && (c == DIM - 1);
+static bool isDone(bool isHeartPuzzle = false) {
+    if (!isHeartPuzzle) {
+        for (int r = 0; r < DIM; r++) {
+            for (int c = 0; c < DIM; c++) {
+                if (map[r][c] != r * DIM + c + 1)
+                    return (r == DIM - 1) && (c == DIM - 1);
+            }
+        }
+    } else {
+        // 하트 그림 퍼즐의 완료 조건 (4x4 고정)
+        for (int i = 0; i < 15; i++) {
+            if (map[i / 4][i % 4] != i + 1)
+                return (map[3][3] == 0);
         }
     }
     return true;
@@ -117,7 +146,7 @@ static char getDirKey() {
     return c;
 }
 
-static void replay() {
+static void replay(bool isHeartPuzzle) {
     printf("\n리플레이를 시작합니다...\n");
     // 최초 섞인 상태로 복원
     for (int r = 0; r < DIM; r++) {
@@ -130,15 +159,15 @@ static void replay() {
     nMove = 0;
 
     // 섞인 상태를 먼저 보여줌
-    display(true);
+    display(true, isHeartPuzzle);
     std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // 1초 대기
 
     // 사용자의 이동 히스토리를 순차적으로 적용, 퍼즐이 맞춰지면 중단
     for (char dir : moveHistory) {
         move(dir, false); // 리플레이 시 기록하지 않음
-        display(true);
+        display(true, isHeartPuzzle);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        if (isDone()) {
+        if (isDone(isHeartPuzzle)) {
             break; // 퍼즐이 맞춰지면 리플레이 종료
         }
     }
@@ -186,7 +215,7 @@ static bool loadGame(const char* filename) {
     double elapsed;
     in >> elapsed;
     tStart = std::chrono::high_resolution_clock::now() - std::chrono::duration_cast<std::chrono::high_resolution_clock::duration>(std::chrono::duration<double>(elapsed));
-    tLastMove = tStart; // tLastMove도 저장된 시간 기준으로 설정
+    tLastMove = tStart;
     int moveCount;
     in >> moveCount;
     moveHistory.clear();
@@ -207,7 +236,7 @@ static bool loadGame(const char* filename) {
     return true;
 }
 
-int playFifteenPuzzle(int size) {
+int playFifteenPuzzle(int size, bool isHeartPuzzle) {
     char choice;
     printf("새 게임(n) 또는 저장된 게임 이어하기(l)? (n/l): ");
     std::cin >> choice;
@@ -216,19 +245,18 @@ int playFifteenPuzzle(int size) {
     if (choice == 'l' || choice == 'L') {
         if (!loadGame("savegame.txt")) {
             printf("저장된 게임이 없습니다. 새 게임을 시작합니다.\n");
-            init(size);
+            init(size, isHeartPuzzle);
         } else {
             // 저장된 상태를 유지하며 표시
-            display();
+            display(false, isHeartPuzzle);
             printRanking();
             printf("\n 엔터 키를 눌러 게임을 이어하세요...");
             getchar();
             moveHistory.clear(); // 저장 이후의 이동만 기록
-            // nMove, tStart, tLastMove는 loadGame에서 읽어온 값 유지
         }
     } else {
-        init(size);
-        display();
+        init(size, isHeartPuzzle);
+        display(false, isHeartPuzzle);
         printRanking();
         printf("\n 엔터 키를 눌러 섞기를 시작하세요...");
         getchar();
@@ -241,14 +269,14 @@ int playFifteenPuzzle(int size) {
         moveHistory.clear(); // 게임 시작 전 moveHistory 초기화
     }
 
-    while (!isDone()) {
+    while (!isDone(isHeartPuzzle)) {
         char dir = getDirKey();
         if (dir == 'q' || dir == 'Q') {
             saveGame("savegame.txt");
             return 0; // 게임 종료
         }
         move(dir, true); // 사용자의 이동 기록
-        display();
+        display(false, isHeartPuzzle);
     }
 
     auto tEnd = std::chrono::high_resolution_clock::now();
@@ -260,7 +288,7 @@ int playFifteenPuzzle(int size) {
     printf("리플레이를 하시겠습니까? (y/n): ");
     std::cin >> replayChoice;
     if (replayChoice == 'y' || replayChoice == 'Y') {
-        replay();
+        replay(isHeartPuzzle);
     }
 
     return addRanking(finalMove, elapsed.count());
