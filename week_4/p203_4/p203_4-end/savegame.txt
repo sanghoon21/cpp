@@ -1,0 +1,9 @@
+3
+1 2 3 
+4 5 6 
+0 7 8 
+0 2
+162
+112.297
+162
+a s d w s a w d s s a w d s a w d w s a w a s d w a s d w d s a d s w s a w w d s a d w s s w a s d w a s d w a d a a w d s s d w a s d a a w d s w d w a a s d d w a a s d d w a a s d d w a a s s d d w w a s s d a w a s d d w w a a s s d d w a d w a s a w d s a w d s w a d s a w d s a w d s d w a s a w d s d w a a s d d w 
