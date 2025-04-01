@@ -10,11 +10,12 @@
 
 #define MAX_DIM 5
 
+// 방향을 정의 (키보드 입력에 따라 왼쪽, 오른쪽, 위, 아래 이동)
 enum Direction { Left = 'a', Right = 'd', Up = 'w', Down = 's' };
-static int map[MAX_DIM][MAX_DIM];
-static int x, y, DIM;
-static int nMove;
-static int finalMove;
+static int map[MAX_DIM][MAX_DIM];  //현재 퍼즐 상태
+static int x, y, DIM;       //빈칸 위치 및 퍼즐 크기
+static int nMove;     //이동 횟수
+static int finalMove;      //게임 종료시 최종 이동 횟수
 static std::chrono::time_point<std::chrono::high_resolution_clock> tStart, tLastMove;
 static std::vector<char> moveHistory;
 static int shuffledMap[MAX_DIM][MAX_DIM]; // 최초 섞인 맵 저장
@@ -49,6 +50,7 @@ static void init(int size, bool isHeartPuzzle) {
     moveHistory.clear();
 }
 
+// 퍼즐을 화면에 출력하는 함수
 static void display(bool isReplay = false, bool isHeartPuzzle = false) {
     system("clear");
     printf("\tFifteen Puzzle (%dx%d)\n\t", DIM, DIM);
@@ -77,6 +79,7 @@ static void display(bool isReplay = false, bool isHeartPuzzle = false) {
     }
 }
 
+// 사용자가 입력한 방향키에 따라 퍼즐 조각 이동
 static bool move(char dir, bool record = true) {
     if (dir == 'd' && x > 0) {
         map[y][x] = map[y][x - 1];
@@ -104,6 +107,7 @@ static bool move(char dir, bool record = true) {
     return true;
 }
 
+//퍼즐 섞는 함수
 static void shuffle(int nShuffle) {
     for (int i = 0; i < nShuffle; i++) {
         char keys[] = {'w', 'a', 's', 'd'};
@@ -122,6 +126,8 @@ static void shuffle(int nShuffle) {
     shuffledY = y;
 }
 
+
+//게임이 완료되었는지 확인
 static bool isDone(bool isHeartPuzzle = false) {
     if (!isHeartPuzzle) {
         for (int r = 0; r < DIM; r++) {
