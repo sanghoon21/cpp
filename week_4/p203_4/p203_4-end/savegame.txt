@@ -1,9 +1,11 @@
-3
-1 2 3 
-4 5 6 
-0 7 8 
-0 2
-162
-112.297
-162
-a s d w s a w d s s a w d s a w d w s a w a s d w a s d w d s a d s w s a w w d s a d w s s w a s d w a s d w a d a a w d s s d w a s d a a w d s w d w a a s d d w a a s d d w a a s d d w a a s s d d w w a s s d a w a s d d w w a a s s d d w a d w a s a w d s a w d s w a d s a w d s a w d s d w a s a w d s d w a a s d d w 
+5
+1 2 3 4 5 
+6 7 8 9 10 
+11 12 13 14 15 
+16 17 18 19 20 
+21 22 0 23 24 
+2 4
+866
+478.035
+866
+w w d w s s a w s s d d w a a a s a w d d d a w d d s a w d s a w d s w a s d a a w d s a w d d s a a w s d d w a s a w d s a w d s d w a s d a s w a a w d s d w a s a w d s a w d d s d a a a a w d s a w d d s a w a s d a w d s a d d w a a s d w a s w d s d w d s a w a s d w a d d a d s a w d a a s d w a s a w d s a w d s a w d d s a w a s d w d d s a w d s a a w d s a w d s a d d w a d a d s d w a s a w d s a w d s a w d d s a w a s d w a s a w d w a s d w a s d d s a w d w a s d w a s s d w a w s s w a a s d d w d w a s d s a w d s a a w d s d w a s a w d d s a w s a w d d s a a w a w d s d w a d a s d w d d s a w a s d w a s d w a d d s a a w d s a w d d s a a w d s a w d s a a a w d s d w a s d w d s a w d s d w a s d w a s w a s d d w a s a w d s a w d a s a w d s a w d s a w d s a w d a s d w a d s w d s a w d s d w a s d w a s d w a a s a w d s d w d s a w d a a a a s d d d w a a a s d d d d w a d s a w d s a w d s w w a s d a w a s d s a w d s a w d a s a w d w a s d s a d w a s d w d s a w d d w a s a s d w a d s a d a w a w d s d s a w d s a w w d s d w a s s a w s d w d w a s d a a s d w a s d w a s d w d s a w d a s a s w d w a s d d w a w a s d w a s a w a d s d w a s d w s a w d s d d w a s w a s w d a s d w a s a w d s d w a s w a s d d d w a s w a s a w s d a w d s d w a a d d s a w d s a w d s d w a s w a s a w d s d w d s a w a a d a s d d w a s d w a s w d a s d w d s a w a s d s w d s w w s w a s a w d s d w a s a w d s d w a s d a a w d s a d d w a s d w a a s a w d s a w d s d w a s d w a s a w d s d a d d w a s w d a a s d w a s s w d w a s d w s a w d s d w a s a w d s a w d s s w w d s a w a s a w a d s a d d w a a s w d s w a d d d s a d a w d d s a w d s a w a s d d w a a a d 
