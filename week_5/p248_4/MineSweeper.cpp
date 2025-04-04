@@ -31,13 +31,14 @@ static void dig(int x, int y) {
         }
     }
 }
-  //깃발
+
+    //깃발
 static void mark(int x, int y) {
     if (isValid(x, y) && mask(x, y) == Hide)
         mask(x, y) = Flag;
 }
 
-
+    // 놓은 깃발 개수
 static int getBombCount() {
     int count = 0;
     for (int y = 0; y < ny; y++)
