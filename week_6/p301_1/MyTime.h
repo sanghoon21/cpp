@@ -1,3 +1,10 @@
+//총 3개의 파일로 구성
+
+//MyTime.h : 클래스의 멤버 변수와 멤버 함수들의 선언만 포함되어있음
+    //다른 파일에서 #include "MyTime.h"를 통해 MyTime 클래스를 사용할 수 있게 함
+
+
+
 #ifndef MYTIME_H
 #define MYTIME_H
 
