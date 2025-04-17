@@ -21,7 +21,7 @@ public:
 int main() {
     Complex a(1, 2), b(3, 4), c;
     c.add(a, b);
-    cout << "방식 3: ";
+    cout << "3. 멤버 함수 (void, 참조 전달): ";
     c.print();
     return 0;
 }

@@ -18,9 +18,9 @@ public:
 };
 
 int main() {
-    Complex a(1, 2), b(3, 4);
-    Complex c = a.add(b);
-    cout << "방식 4: ";
+    Complex a(1, 2), b(3, 4), c;
+    c = a.add(b);
+    cout << "4. 멤버 함수 (return, 참조 전달): ";
     c.print();
     return 0;
 }
