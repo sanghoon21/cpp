@@ -14,7 +14,7 @@ public:
 };
 
 // 2. a, b가 add() 함수에 입력되어 또다른 객체가 반환(return)됨
-// add()에 입력되어서 계산된 값(Complex형(복소수) 객체)을 반환하여 c에 대입
+// add()에 입력되어서 계산된 값(Complex형(복소수 형태) 객체)을 반환하여 c에 대입
 Complex add(Complex a, Complex b) {
     // add 함수가 리턴되며 생성된 객체가 c에 대입됨
     return Complex(a.real + b.real, a.imag + b.imag);

@@ -27,8 +27,9 @@ void add(Complex& a, Complex& b, Complex& result) {
 
 int main() {
     Complex a(1, 2), b(3, 4), c;  // 1. a, b, c 객체 생성 (복소수 만들기)
+                                // () + ()i 형태의 복소수가 생성됨
     
-    // 2. a, b 값을 참조로 함수에 전달, c도 참조로 전달하여 함수 안에서 값을 직접 채움
+    // 2. a, b 값(복소수)을 참조로 함수에 전달, c도 참조로 전달하여 함수 안에서 값을 직접 채움
     add(a, b, c);
 
     cout << "1. 일반 함수 (void, 참조 전달): ";
