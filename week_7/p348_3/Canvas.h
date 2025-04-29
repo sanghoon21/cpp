@@ -1,31 +1,42 @@
+// 터미널에 2차원 맵을 출력하기 위한 클래스, 각 칸에 문자열(예: "■", "※")을 출력할 수 있음
+
 #pragma once
 #include <iostream>
 #include <string>
+#include <iomanip>
 #define MAXLINES 100
 using namespace std;
 
+//
 class Canvas {
-    string line[MAXLINES]; // 화면 출력용 문자열
-    int xMax, yMax; // 화면 크기
+    string grid[MAXLINES][MAXLINES]; // 2차원 배열로 각 칸에 문자열 저장
+    int xMax, yMax;                  // 맵의 크기
 public:
     Canvas(int nx = 10, int ny = 10) : xMax(nx), yMax(ny) {
         for (int y = 0; y < yMax; y++)
-            line[y] = string(xMax * 2, ' ');
+            for (int x = 0; x < xMax; x++)
+                grid[y][x] = "."; // 각 칸을 "."으로 초기화
     }
+
+    // 맵 출력 - draw(), print()
     void draw(int x, int y, string val) {
         if (x >= 0 && y >= 0 && x < xMax && y < yMax)
-            line[y].replace(x * 2, 2, val);
+            grid[y][x] = val; // 유니코드 문자열 전체를 저장
     }
-    void clear(string val = ". ") { // 기본값: 점 두 칸
+    void clear(string val = ".") {
         for (int y = 0; y < yMax; y++)
             for (int x = 0; x < xMax; x++)
                 draw(x, y, val);
     }
     void print(const char *title = "<My Canvas>") {
-        system("clear"); // Ubuntu에서는 clear
+        system("clear");
         cout << title << endl;
-        for (int y = 0; y < yMax; y++)
-            cout << line[y] << endl;
+        for (int y = 0; y < yMax; y++) {
+            for (int x = 0; x < xMax; x++) {
+                cout << grid[y][x] << " "; // 각 칸을 그대로 출력하고 공백 추가
+            }
+            cout << endl;
+        }
         cout << endl;
     }
 };
