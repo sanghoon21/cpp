@@ -4,8 +4,8 @@
 using namespace std;
 
 class Matrix {
-	int rows, cols;		// Çà°ú ¿­ÀÇ Å©±â
-	int** mat;		// ½ÇÁ¦ Çà·Ä µ¥ÀÌÅÍ
+	int rows, cols;		// í–‰ê³¼ ì—´ì˜ í¬ê¸°
+	int** mat;		// ì‹¤ì œ í–‰ë ¬ ë°ì´í„°
 public:
 	Matrix(int r = 0, int c = 0) : rows(r), cols(c), mat(NULL) {
 		mat = new int*[rows];
