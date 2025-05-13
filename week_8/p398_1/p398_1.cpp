@@ -84,16 +84,19 @@ public:
     }
 
 
-    // // (번외) 문자열 내용과 주소를 출력해주는 멤버함수 printName() 추가
-    // void printName() const {  //함수 정의, 반환값 X, 출력만.
-    //     // name이 nullptr이 아니라면, 즉 유효한 문자열 메모리를 가리킨다면 실행
-    //     if (name != nullptr)
-    //         // cout이 문자열 포인터인 name을 만나 해당 포인터가 가리키는 문자열 출력
-    //         // void 포인터로 변환하여 포인터 주소 자체를 출력?
-    //         cout << "name: " << name << " (주소: " << static_cast<void*>(name) << ")\n" << endl;
-    //     else                                    // name 포인터의 주소를 숫자 형태로 출력?
-    //         cout << "name: (null)" << endl;
-    // }
+    // (번외) 문자열 내용과 주소를 출력해주는 멤버함수 printName() 추가
+    // 주소가 다르다는 것을 통해:
+    //  => 각 객체가 name 문자열을 각각 독립된 메모리에 저장하고 있음을 확인 가능.
+    //  => 복사 생성자가 깊은 복사를 성공적으로 수행하고 있다는 것.
+    void printName() const {  //함수 정의, 반환값 X, 출력만.
+        // name이 nullptr이 아니라면, 즉 유효한 문자열 메모리를 가리킨다면 실행
+        if (name != nullptr)
+            // cout이 문자열 포인터인 name을 만나 해당 포인터가 가리키는 문자열 출력
+            // void 포인터로 변환하여 포인터 주소 자체를 출력?
+            cout << "name: " << name << " (주소: " << static_cast<void*>(name) << ")\n" << endl;
+        else                                    // name 포인터의 주소를 숫자 형태로 출력?
+            cout << "name: (null)" << endl;
+    }
 
 
 };
@@ -104,11 +107,11 @@ int Sample::count = 0;
 int main() {
     Sample a("shshsh");
     Sample::printCount();  // 객체 수 출력
-    // a.printName();         // a의 name, 주소 출력
+    a.printName();         // a의 name, 주소 출력
 
     Sample b(a);
     Sample::printCount();  // 객체 수 출력
-    // b.printName();         // b의 name, 주소 출력
+    b.printName();         // b의 name, 주소 출력
 
     return 0;
 }

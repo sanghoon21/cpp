@@ -1,3 +1,5 @@
+// 게임 맵을 시각적으로 표현함
+
 #pragma once
 #include <iostream>
 #include <string>
