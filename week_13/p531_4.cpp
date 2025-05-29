@@ -28,23 +28,25 @@ public:
 //! 원래 C++에서 구현된 []와 ()에 해당하는 기능대로 쓰지 않고, 내가 쓰고 싶은 대로 중복 정의해서 사용함.
 // operator[]는 주어진 index에 해당하는 list 배열의 요소를 int& 타입으로 반환.
     // (1) 인덱스 연산자 중복
+// operator[]는 주어진 index에 해당하는 list 배열의 요소를 int& 타입으로 반환.
 //! 원래 []는 배열이나 컨테이너에 대해 요소 접근을 의미하지만,
 //! SampleList 클래스에서는 list 배열에 접근하는 방식으로 동작을 중복 정의함.
 
-    int& operator[](int index) {
+    int& operator[](int index) 
+    {
         return list[index];
     }
 
     // (2) 함수 호출 연산자 중복 (단일 인덱스)
-// operator()도 주어진 index에 해당하는 list 배열의 요소를 int&로 반환.
+// operator()도 주어진 index에 해당하는 list 배열의 요소를 int& 타입으로 반환.
 //! 원래 ()는 함수 호출을 의미하지만,
-//! SampleList 에서는 배열 요소 접근(단일 인덱스 또는 두 수의 곱을 인덱스로 사용)으로 동작을 재정의함.
+//! SampleList 에서는 배열 요소 접근(단일 인덱스 또는 두 수의 곱을 인덱스로 사용)으로 동작을 중복 정의함.
     int& operator()(int index) {
         return list[index];
     }
 
     // (3) 함수 호출 연산자 중복 (두 수의 곱)
-// operator()(int a, int b)는 a * b를 계산한 값에 해당하는 인덱스의 list 요소를 int&로 반환.
+// operator()(int a, int b)는 a * b를 계산한 값에 해당하는 인덱스의 list 요소를 int& 타입으로 반환.
     int& operator()(int a, int b) {
         return list[a * b];
     }
