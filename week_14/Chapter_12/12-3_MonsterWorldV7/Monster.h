@@ -3,13 +3,13 @@
 #include "Point.h"
 
 class Monster {
-protected:
-	string name, icon; 	// ëª¬ìŠ¤í„° ì´ë¦„ê³¼ í™”ë©´ ì¶œë ¥ìš© ì•„ì´ì½˜
-	int nItem;		// ë¨¹ì€ ì•„ì´í…œ ìˆ˜
-	Point q, p;		// ì¶”ê°€: ì´ì „ ìœ„ì¹˜(q)ì™€ í˜„ì¬ ìœ„ì¹˜(p)
-	int nSleep;		// ì¶”ê°€: ì‰¬ì–´ì•¼ í•˜ëŠ” íšŸìˆ˜
-	double dist;		// ì¶”ê°€: ì‰¬ê³  ë‚œ ë‹¤ìŒ ì›€ì§ì¸ ê±°ë¦¬
-	double total;		// ì¶”ê°€: ì´ ì›€ì§ì¸ ê±°ë¦¬
+public:
+	string name, icon; 	// ¸ó½ºÅÍ ÀÌ¸§°ú È­¸é Ãâ·Â¿ë ¾ÆÀÌÄÜ
+	int nItem;		// ¸ÔÀº ¾ÆÀÌÅÛ ¼ö
+	Point q, p;		// Ãß°¡: ÀÌÀü À§Ä¡(q)¿Í ÇöÀç À§Ä¡(p)
+	int nSleep;		// Ãß°¡: ½¬¾î¾ß ÇÏ´Â È½¼ö
+	double dist;		// Ãß°¡: ½¬°í ³­ ´ÙÀ½ ¿òÁ÷ÀÎ °Å¸®
+	double total;		// Ãß°¡: ÃÑ ¿òÁ÷ÀÎ °Å¸®
 
 	void clip(int maxx, int maxy) { p(maxx, maxy); }
 	void eat(int** map) {
@@ -33,10 +33,10 @@ protected:
 		else return false;
 	}
 public:
-	Monster(string n = "ë¬´ëª…ê´´ë¬¼", string i = "â€»", int x = 0, int y = 0)
+	Monster(string n = "¹«¸í±«¹°", string i = "¡Ø", int x = 0, int y = 0)
 		: name(n), icon(i), nItem(0),
 		p(x, y), q(x, y), nSleep(0), dist(0.0), total(0.0) {}
-	virtual ~Monster() { cout << icon << nItem << "ê±°ë¦¬:" << total << endl; }
+	virtual ~Monster() { cout << icon << nItem << "°Å¸®:" << total << endl; }
 
 	void draw(Canvas &canvas) { canvas.draw(p, icon); }
 	virtual void move(int** map, int maxx, int maxy) {

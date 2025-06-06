@@ -1,0 +1,61 @@
+// 1. 게임 맵을 시각적으로 표현하기 위한 캔버스 관리 및 출력 기능 제공, Point 객체를 통한 좌표 지원.
+
+#pragma once
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Point.h" // Point.h 추가
+#define MAXLINES 100
+using namespace std;
+
+//* Canvas: 게임 맵을 문자열 배열로 관리하고 시각적으로 출력, Point 객체를 통해 좌표를 지원.
+class Canvas {
+    string grid[MAXLINES][MAXLINES]; // 2차원 배열로 각 칸에 문자열 저장
+    int xMax, yMax;                  // 맵의 크기
+
+public:
+// 4-44. 생성자 - grid를 "."으로 초기화.
+    Canvas(int nx = 10, int ny = 10) : xMax(nx), yMax(ny) 
+    {
+        for (int y = 0; y < yMax; y++)
+            for (int x = 0; x < xMax; x++)
+                grid[y][x] = "."; // 각 칸을 "."으로 초기화
+    }
+
+// 4-45. draw() - 지정된 위치에 문자열(val) 저장, Point 객체를 지원.
+    void draw(int x, int y, string val) 
+    {
+        if (x >= 0 && y >= 0 && x < xMax && y < yMax)
+            grid[y][x] = val; // 유니코드 문자열 전체를 저장
+    }
+
+// 4-45-1. draw() - Point 객체를 사용해 지정된 위치에 문자열(val) 저장.
+    void draw(Point p, string val) {
+        if (p[0] >= 0 && p[1] >= 0 && p[0] < xMax && p[1] < yMax)
+            grid[p[1]][p[0]] = val;
+    }
+
+// 4-46. clear() - 모든 칸을 지정된 문자열(기본 ".")로 초기화.
+    void clear(string val = ".") 
+    {
+        for (int y = 0; y < yMax; y++)
+            for (int x = 0; x < xMax; x++)
+                draw(x, y, val);
+    }
+
+// 4-47. print() - 화면 지우고 제목, 맵 출력.
+    void print(const char *title = "<My Canvas>") 
+    {
+        system("clear");
+        cout << title << endl;
+        for (int y = 0; y < yMax; y++) 
+        {
+            for (int x = 0; x < xMax; x++) 
+            {
+                cout << grid[y][x] << " "; // 각 칸을 그대로 출력하고 공백 추가
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+};

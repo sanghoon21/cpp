@@ -4,12 +4,12 @@
 using namespace std;
 
 class Point {
-	int x, y;		//  ì ì˜ xì™€ y ì¢Œí‘œ ê°’
-	friend class Monster;	//  Monsterë¥¼ ì¹œêµ¬ í´ë˜ìŠ¤ë¡œ ë“±ë¡
-	friend class Canvas;	//  Canvasë¥¼ ì¹œêµ¬ í´ë˜ìŠ¤ë¡œ ë“±ë¡
+	int x, y;		//  Á¡ÀÇ x¿Í y ÁÂÇ¥ °ª
+	friend class Monster;	//  Monster¸¦ Ä£±¸ Å¬·¡½º·Î µî·Ï
+	friend class Canvas;	//  Canvas¸¦ Ä£±¸ Å¬·¡½º·Î µî·Ï
 public:
 	Point(int xx = 0, int yy = 0) : x(xx), y(yy) {  }
-	int& operator[] (int id) {	// ì¸ë±ìŠ¤ ì—°ì‚°ì
+	int& operator[] (int id) {	// ÀÎµ¦½º ¿¬»êÀÚ
 		if (id == 0) return x;
 		else if (id == 1) return y;
 		else exit(0);
