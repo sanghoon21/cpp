@@ -66,7 +66,7 @@ class MonsterWorld
                 if (Map(x, y) > 0) canvas.draw(x, y, "■");
         for (int i = 0; i < nMon; i++)
             pMon[i]->draw(canvas);
-        canvas.print("[ Monster World (여유있는 삶) ]");
+        canvas.print("[ Monster World (경쟁적인 삶) ]");
         cout << " 전체 이동 횟수 = " << nMove << endl;
         cout << " 남은 아이템 수 = " << countItems() << endl;
         for (int i = 0; i < nMon; i++)
